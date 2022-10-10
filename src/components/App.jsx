@@ -18,7 +18,6 @@ export const App = () => {
         <Sun/>
       </Main>
       <Footer/>
-      
     </>
   );
 };

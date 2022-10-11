@@ -1,31 +1,32 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
-import { useDispatch} from 'react-redux';
-import { addContact } from 'redux/contactSlice';
+import {
+  useAddContactMutation,
+} from 'redux/contactsAPI';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+
 import {
   FormContacts,
   SubmitBtn,
-  LabelForm,
   InputForm,
   Textarea,
 } from './ContactForm.styled';
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [addContact, { isLoading, error }] = useAddContactMutation();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-     dispatch(addContact({
-      id: nanoid(),
-      name,
-      email,
-      feedback,
-    }));
-    reset();
+    try {
+      await addContact({ name, email, feedback });
+      Report.success(`Feedback sent!`);
+      reset();
+    } catch {
+      Report.failure(`Error:${error}`);  
+    }  
   };
 
   const reset = () => {
@@ -87,7 +88,7 @@ export const ContactForm = () => {
               title="Feedback massage"
               required
               />
-          <SubmitBtn type="submit">Send massage</SubmitBtn>
+          <SubmitBtn type="submit" disabled={isLoading}>{isLoading ? 'Sending ...' : 'Send massage'}</SubmitBtn>
         </FormContacts>
       </>
     );

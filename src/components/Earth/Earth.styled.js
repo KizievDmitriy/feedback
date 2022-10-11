@@ -21,6 +21,7 @@ top: 463px;
 `;
 
 export const YellowSmile = styled.div`
+@media(min-width: 1200px){
 &::after{
 content: url(${YelowSun});
 position: absolute;
@@ -28,4 +29,6 @@ left: 757px;
 top: 400px;
 z-index: 5;
 }
+}
+
 `;

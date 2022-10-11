@@ -27,7 +27,10 @@ list-style: none;
 display: flex;
 align-items: flex-start;
 margin-top: 79px;
-margin-left: 300px;
+@media(min-width: 768px) {
+    margin-left: 300px;
+}
+
 
 
 `;

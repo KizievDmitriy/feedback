@@ -4,7 +4,7 @@ export const FormContacts = styled.form`
   position: absolute;
   z-index: 45;
   margin-bottom: 174px;
-  width: 575px;
+  max-width: 575px;
   display: flex;
   flex-direction: column;
 `;
@@ -12,15 +12,17 @@ export const FormContacts = styled.form`
 
 
 export const InputForm = styled.input`
-  min-width: 514px;
+  
   padding: 30px;
   margin-bottom: 8px;
   border: 1px solid #DCDCDC;
   border-radius: 10px;
+  @media (min-width: 768px) {
+    width: 514px;
+  }
 `;
 
 export const Textarea = styled.textarea`
-  min-width: 514px;
   min-height: 127px;
   padding: 30px;
   border: 1px solid #DCDCDC;
